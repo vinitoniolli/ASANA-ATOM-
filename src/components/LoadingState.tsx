@@ -5,7 +5,7 @@ interface LoadingStateProps {
 
 export function LoadingState({
   title = 'Carregando dados do painel',
-  description = 'Buscando a planilha atualizada no Google Sheets via n8n.',
+  description = 'Buscando os dados atualizados do painel.',
 }: LoadingStateProps) {
   return (
     <section className="state-card" aria-live="polite">

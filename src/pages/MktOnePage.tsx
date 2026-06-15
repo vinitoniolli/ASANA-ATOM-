@@ -60,8 +60,6 @@ export function MktOnePage() {
         onRefresh={refresh}
       />
 
-      <p className="sync-note">Dados sincronizados com Google Sheets via n8n.</p>
-
       {error ? <ErrorState compact message={error} onRetry={refresh} /> : null}
 
       {isCompletelyEmpty ? (

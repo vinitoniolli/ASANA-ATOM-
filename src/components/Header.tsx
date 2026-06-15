@@ -44,9 +44,6 @@ export function Header({
         <div className="header__title-block">
           <h2 className="header__title">{panelName}</h2>
           <p className="header__section">{sectionName}</p>
-          <p className="header__summary">
-            Leitura direta do endpoint do n8n, com renderização dinâmica para colunas e linhas.
-          </p>
         </div>
 
         <div className="header__actions">

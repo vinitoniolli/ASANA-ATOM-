@@ -6,9 +6,9 @@ interface SidebarProps {
 }
 
 const TABS: Array<{ key: TabKey; helper: string }> = [
-  { key: 'Comercial', helper: 'Visão reservada para indicadores comerciais.' },
-  { key: 'MKT 1', helper: 'Painel conectado ao Google Sheets via n8n.' },
-  { key: 'MKT 2', helper: 'Espaço pronto para a próxima frente de marketing.' },
+  { key: 'Comercial', helper: 'Chrystian e Vini' },
+  { key: 'MKT 1', helper: 'Andressa e Isa' },
+  { key: 'MKT 2', helper: 'Natiele e Priscila' },
 ]
 
 export function Sidebar({ activeTab, onSelectTab }: SidebarProps) {
@@ -21,9 +21,6 @@ export function Sidebar({ activeTab, onSelectTab }: SidebarProps) {
         <div className="sidebar__brand-copy">
           <span className="sidebar__eyebrow">Painel de Operações</span>
           <h1 className="sidebar__title">ATOM</h1>
-          <p className="sidebar__description">
-            Front-end em React consumindo dados vivos do Google Sheets via n8n.
-          </p>
         </div>
       </div>
 
