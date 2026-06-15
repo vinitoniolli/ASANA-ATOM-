@@ -7,8 +7,8 @@ interface SidebarProps {
 
 const TABS: Array<{ key: TabKey; helper: string }> = [
   { key: 'Comercial', helper: 'Chrystian e Vini' },
-  { key: 'MKT 1', helper: 'Andressa e Isa' },
-  { key: 'MKT 2', helper: 'Natiele e Priscila' },
+  { key: 'MKT 1', helper: 'Natiele e Priscila' },
+  { key: 'MKT 2', helper: 'Andressa e Isa' },
 ]
 
 export function Sidebar({ activeTab, onSelectTab }: SidebarProps) {
