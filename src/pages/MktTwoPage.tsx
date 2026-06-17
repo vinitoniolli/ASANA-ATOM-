@@ -6,12 +6,13 @@ import { Header } from '../components/Header'
 import { LoadingState } from '../components/LoadingState'
 import { MetricCards } from '../components/MetricCards'
 import { useDashboardData } from '../hooks/useDashboardData'
-import { buildMetricCards, filterRows } from '../utils/dashboard'
+import { filterRows } from '../utils/dashboard'
+import { buildSocialMetricCards } from '../utils/social'
 
-export function MktOnePage() {
-  const { data, status, error, isRefreshing, refresh } = useDashboardData(
-    'https://n8nsemfila.iatom.site/webhook/painel-dados',
-  )
+const ENDPOINT = 'https://n8nsemfila.iatom.site/webhook/dashboard-redes-sociais-2'
+
+export function MktTwoPage() {
+  const { data, status, error, isRefreshing, refresh } = useDashboardData(ENDPOINT)
   const [searchTerm, setSearchTerm] = useState('')
   const deferredSearchTerm = useDeferredValue(searchTerm)
 
@@ -22,7 +23,7 @@ export function MktOnePage() {
   if (status === 'loading' && !data) {
     return (
       <section className="page-shell">
-        <Header panelName="ATOM" sectionName="MKT 1" status="loading" />
+        <Header panelName="ATOM" sectionName="MKT 2" status="loading" />
         <LoadingState />
       </section>
     )
@@ -31,7 +32,7 @@ export function MktOnePage() {
   if (status === 'error' && !data) {
     return (
       <section className="page-shell">
-        <Header panelName="ATOM" sectionName="MKT 1" status="error" onRefresh={refresh} />
+        <Header panelName="ATOM" sectionName="MKT 2" status="error" onRefresh={refresh} />
         <ErrorState
           message={error ?? 'O endpoint não respondeu com um payload válido.'}
           onRetry={refresh}
@@ -44,7 +45,7 @@ export function MktOnePage() {
     return null
   }
 
-  const metrics = buildMetricCards(data)
+  const metrics = buildSocialMetricCards(data)
   const hasColumns = columns.length > 0
   const isCompletelyEmpty = columns.length === 0 && rows.length === 0
 
@@ -52,7 +53,7 @@ export function MktOnePage() {
     <section className="page-shell">
       <Header
         panelName="ATOM"
-        sectionName="MKT 1"
+        sectionName="MKT 2"
         status={status}
         document={data.document}
         sheetName={data.sheetName}

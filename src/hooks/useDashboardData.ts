@@ -2,7 +2,6 @@ import { useEffect, useEffectEvent, useRef, useState } from 'react'
 import type { DashboardResponse, LoadStatus } from '../types/dashboard'
 import { parseDashboardResponse } from '../utils/dashboard'
 
-const ENDPOINT = 'https://n8nsemfila.iatom.site/webhook/painel-dados'
 const REFRESH_INTERVAL = 10_000
 
 interface DashboardState {
@@ -12,7 +11,7 @@ interface DashboardState {
   isRefreshing: boolean
 }
 
-export function useDashboardData() {
+export function useDashboardData(endpoint: string) {
   const abortRef = useRef<AbortController | null>(null)
   const [state, setState] = useState<DashboardState>({
     data: undefined,
@@ -35,7 +34,7 @@ export function useDashboardData() {
     }))
 
     try {
-      const response = await fetch(`${ENDPOINT}?t=${Date.now()}`, {
+      const response = await fetch(`${endpoint}?t=${Date.now()}`, {
         cache: 'no-store',
         headers: {
           'Cache-Control': 'no-store',

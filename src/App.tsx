@@ -1,8 +1,7 @@
 import { startTransition, useState } from 'react'
-import { EmptyState } from './components/EmptyState'
-import { Header } from './components/Header'
 import { Layout } from './components/Layout'
 import { MktOnePage } from './pages/MktOnePage'
+import { MktTwoPage } from './pages/MktTwoPage'
 import type { TabKey } from './types/dashboard'
 
 function App() {
@@ -20,14 +19,8 @@ function App() {
         <MktOnePage />
       </div>
 
-      <div hidden={activeTab === 'MKT 1'} aria-hidden={activeTab === 'MKT 1'}>
-        <section className="page-shell">
-          <Header panelName="ATOM" sectionName={activeTab} status="success" />
-          <EmptyState
-            title="Em construção"
-            description="Esta seção ainda está sendo preparada para receber novos dados e indicadores."
-          />
-        </section>
+      <div hidden={activeTab !== 'MKT 2'} aria-hidden={activeTab !== 'MKT 2'}>
+        <MktTwoPage />
       </div>
     </Layout>
   )
