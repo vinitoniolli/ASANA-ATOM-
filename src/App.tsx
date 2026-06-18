@@ -1,11 +1,12 @@
 import { startTransition, useState } from 'react'
 import { Layout } from './components/Layout'
+import { ComercialPage } from './pages/ComercialPage'
 import { MktOnePage } from './pages/MktOnePage'
 import { MktTwoPage } from './pages/MktTwoPage'
 import type { TabKey } from './types/dashboard'
 
 function App() {
-  const [activeTab, setActiveTab] = useState<TabKey>('MKT 1')
+  const [activeTab, setActiveTab] = useState<TabKey>('Comercial')
 
   const handleTabChange = (nextTab: TabKey) => {
     startTransition(() => {
@@ -15,6 +16,10 @@ function App() {
 
   return (
     <Layout activeTab={activeTab} onSelectTab={handleTabChange}>
+      <div hidden={activeTab !== 'Comercial'} aria-hidden={activeTab !== 'Comercial'}>
+        <ComercialPage />
+      </div>
+
       <div hidden={activeTab !== 'MKT 1'} aria-hidden={activeTab !== 'MKT 1'}>
         <MktOnePage />
       </div>
