@@ -2,7 +2,6 @@ import { useEffect, useEffectEvent, useRef, useState } from 'react'
 import type { DashboardResponse, LoadStatus } from '../types/dashboard'
 import { parseDashboardResponse } from '../utils/dashboard'
 
-const REFRESH_INTERVAL = 10_000
 
 interface DashboardState {
   data?: DashboardResponse
@@ -75,12 +74,7 @@ export function useDashboardData(endpoint: string) {
   useEffect(() => {
     void fetchDashboard('initial')
 
-    const intervalId = window.setInterval(() => {
-      void fetchDashboard('poll')
-    }, REFRESH_INTERVAL)
-
     return () => {
-      window.clearInterval(intervalId)
       abortRef.current?.abort()
     }
   }, [])

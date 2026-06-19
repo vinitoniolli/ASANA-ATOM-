@@ -39,7 +39,7 @@ export function Sidebar({ activeTab, onSelectTab }: SidebarProps) {
       </nav>
 
       <div className="sidebar__footer">
-        Atualização automática a cada 10 segundos e sincronização manual sob demanda.
+        Para ver novas atualizações, clique no botão de atualizar agora.
       </div>
     </aside>
   )
