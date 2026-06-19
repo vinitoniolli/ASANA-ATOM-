@@ -3,6 +3,8 @@ import type { DashboardRow } from '../types/dashboard'
 import {
   COLUMN_GROUP_LABELS,
   formatCellValue,
+  formatCurrencyValue,
+  isCurrencyColumn,
   resolveColumnGroup,
 } from '../utils/dashboard'
 
@@ -75,7 +77,9 @@ export function DynamicTable({
                 <tr key={`${String(row['row_number'] ?? rowIndex)}-${rowIndex}`}>
                   {columns.map((column) => (
                     <td key={`${column}-${rowIndex}`} data-group={resolveColumnGroup(column)}>
-                      {formatCellValue(row[column])}
+                      {isCurrencyColumn(column)
+                        ? formatCurrencyValue(row[column])
+                        : formatCellValue(row[column])}
                     </td>
                   ))}
                 </tr>

@@ -88,6 +88,41 @@ export function resolveColumnGroup(column: string): ColumnGroupKey {
   return GROUP_RULES[normalizeColumnName(column)] ?? 'other'
 }
 
+const CURRENCY_KEYWORDS = [
+  'checkout',
+  'inside sales',
+  'total',
+  'valor',
+  'receita',
+  'venda',
+  'faturamento',
+  'preço',
+  'price',
+  'revenue',
+  'sales',
+  'amount',
+]
+
+export function isCurrencyColumn(column: string): boolean {
+  const lower = column.toLocaleLowerCase('pt-BR')
+  return CURRENCY_KEYWORDS.some((kw) => lower.includes(kw))
+}
+
+export function formatCurrencyValue(value: DashboardValue): string {
+  if (value === null || value === undefined) return '—'
+
+  const num = typeof value === 'number' ? value : Number(String(value).replace(',', '.'))
+
+  if (!Number.isFinite(num)) return formatCellValue(value)
+
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(num)
+}
+
 export function formatCellValue(value: DashboardValue): string {
   if (value === null || value === undefined) {
     return '—'
@@ -95,6 +130,12 @@ export function formatCellValue(value: DashboardValue): string {
 
   if (typeof value === 'string') {
     return value.trim().length > 0 ? value : '—'
+  }
+
+  if (typeof value === 'number') {
+    return Number.isFinite(value)
+      ? new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 }).format(value)
+      : '—'
   }
 
   return String(value)
